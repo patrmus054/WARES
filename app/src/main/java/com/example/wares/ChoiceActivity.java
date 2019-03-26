@@ -1,25 +1,23 @@
 package com.example.wares;
 
-import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 public class ChoiceActivity extends AppCompatActivity {
 
     Toolbar toolbar;
-    private final static String TAG= ChoiceActivity.class.getSimpleName();
+    private final static String TAG = ChoiceActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle saveInstanceState){
@@ -30,6 +28,7 @@ public class ChoiceActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.inflateMenu(R.menu.menu_main);
         createMap();
+        setUpNavigationDrawer();
     }
 
     private void createMap() {
@@ -57,9 +56,6 @@ public class ChoiceActivity extends AppCompatActivity {
                 msg = "Delete";
                 break;
             case R.id.search:
-                //showUsers();
-                /*Intent intent = new Intent(this, ShowUsers.class);
-                startActivity(intent);*/
                 msg = "Search";
                 break;
             case R.id.edit:
@@ -89,8 +85,10 @@ public class ChoiceActivity extends AppCompatActivity {
        // recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
-
-    private void setUpRecyclerView(){
-        //  RecyclerAdapter recyclerAdapter = (RecyclerAdapter) findViewById(R.id.recyclerView);
+    private void setUpNavigationDrawer(){
+        NavigationDrawerFragment navigationDrawerFragment = (NavigationDrawerFragment)getSupportFragmentManager().findFragmentById(R.id.nav_drawer_fragment);
+        DrawerLayout drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        navigationDrawerFragment.setUpDrawer(R.id.nav_drawer_fragment, drawerLayout, toolbar);
     }
+
 }
